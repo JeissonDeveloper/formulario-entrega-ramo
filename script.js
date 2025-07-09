@@ -48,7 +48,7 @@ formulario.addEventListener("submit", async (e) => {
   data.append("firma", firmaDataURL);
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbyLUOsBojkgSTDdPeGt1EkkZiONlNRNsrsnsaO4V6TKKZ9equdOhIgA-oFrUMjOM4Co5w/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbyWGmajERR-nO3ss9zbjOnUmgZrb5rEI2LXllVUfhZJFOhmtlOcKWSdQoKHgb958vx2/exec", {
       method: "POST",
       body: data,
     });
