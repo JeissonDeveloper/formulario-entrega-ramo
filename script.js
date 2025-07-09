@@ -14,6 +14,36 @@ canvas.addEventListener("mouseup", () => dibujando = false);
 canvas.addEventListener("mouseout", () => dibujando = false);
 canvas.addEventListener("mousemove", dibujar);
 
+// 👉 Soporte para pantallas táctiles
+canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  dibujando = true;
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches[0];
+  ctx.beginPath();
+  ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+}, { passive: false });
+
+canvas.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  if (!dibujando) return;
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches[0];
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#000";
+  ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+}, { passive: false });
+
+canvas.addEventListener("touchend", () => {
+  dibujando = false;
+});
+
+// 👉 Fin soporte touch
+
 function dibujar(e) {
   if (!dibujando) return;
   const rect = canvas.getBoundingClientRect();
@@ -66,3 +96,4 @@ formulario.addEventListener("submit", async (e) => {
 });
 
 obtenerSerialDesdeURL();
+
